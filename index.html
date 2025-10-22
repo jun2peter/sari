@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SARI 웹사이트</title>
     <style>
         body {
@@ -13,6 +13,33 @@
             position: relative;
             background-color: #FFFFFF;
             font-family: Arial, sans-serif;
+        }
+        
+        /* 모바일 SVG 화질 최적화 */
+        @media screen and (max-width: 768px) {
+            img[src$=".svg"] {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            
+            /* 숫자 SVG들에 특별한 모바일 최적화 */
+            .bottom-svg-1 img, .bottom-svg-2 img, .bottom-svg-3 img, .bottom-svg-4 img,
+            .bottom-svg-5 img, .bottom-svg-6 img, .bottom-svg-7 img, .bottom-svg-8 img,
+            .bottom-svg-9 img, .bottom-svg-10 img, .bottom-svg-11 img, .bottom-svg-12 img,
+            .bottom-svg-13 img, .bottom-svg-14 img, .bottom-svg-15 img, .bottom-svg-16 img,
+            .bottom-svg-17 img {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                will-change: transform;
+            }
         }
         
         .menu {
