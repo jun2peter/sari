@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARI 웹사이트</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 390px;
+            height: 100vh;
+            position: relative;
+            background-color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+        
+        .menu {
+            position: absolute;
+            left: 17.8px;
+            top: 26.72px;
+            z-index: 1000;
+        }
+        
+        .sari-logo {
+            position: absolute;
+            left: 166px;
+            top: 25px;
+            z-index: 1000;
+        }
+        
+        .photo {
+            position: absolute;
+            left: -1px;
+            top: 67.76px;
+            z-index: 1000;
+        }
+        
+        .svg-a {
+            position: absolute;
+            left: 17.8px;
+            top: 346.5px;
+            z-index: 1000;
+        }
+        
+        .svg-b {
+            position: absolute;
+            left: 77.03px;
+            top: 346.5px;
+            z-index: 1000;
+        }
+        
+        .svg-c {
+            position: absolute;
+            left: 168.26px;
+            top: 346.5px;
+            z-index: 1000;
+        }
+        
+        .svg-d {
+            position: absolute;
+            left: 236.49px;
+            top: 346.5px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        .svg-a, .svg-b, .svg-c, .svg-d {
+            cursor: pointer;
+        }
+        
+        .bottom-svg-1 {
+            position: absolute;
+            left: 0px;
+            top: 411.5px;
+            z-index: 1000;
+        }
+        
+        .bottom-svg-2 {
+            position: absolute;
+            left: 195px;
+            top: 411.5px;
+            z-index: 1000;
+        }
+        
+        .bottom-svg-3 {
+            position: absolute;
+            left: 0px;
+            top: 660.97px;
+            z-index: 1000;
+        }
+        
+        .bottom-svg-4 {
+            position: absolute;
+            left: 195px;
+            top: 660.97px;
+            z-index: 1000;
+        }
+        
+        .wow-svg {
+            position: absolute;
+            left: 352.45px;
+            top: 387.04px;
+            z-index: 1000;
+        }
+        
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .menu-list li a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 12px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-list li a:hover {
+            background-color: #4CAF50;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu SVG -->
+    <div class="menu">
+        <img src="main/menu.svg" alt="Menu" style="width: auto; height: auto;">
+    </div>
+    
+    <!-- SARI Logo SVG -->
+    <div class="sari-logo">
+        <img src="main/SARI.svg" alt="SARI" style="width: auto; height: auto;">
+    </div>
+    
+    <!-- Photo SVG -->
+    <div class="photo">
+        <img src="main/photo.svg" alt="Photo" style="width: auto; height: auto;">
+    </div>
+    
+    <!-- SVG elements -->
+    <div class="svg-a" onclick="toggleLetter('a')">
+        <img id="img-a" src="main/aa.svg" alt="aa" style="width: auto; height: auto;">
+    </div>
+    <div class="svg-b" onclick="toggleLetter('b')">
+        <img id="img-b" src="main/b.svg" alt="b" style="width: auto; height: auto;">
+    </div>
+    <div class="svg-c" onclick="toggleLetter('c')">
+        <img id="img-c" src="main/c.svg" alt="c" style="width: auto; height: auto;">
+    </div>
+    <div class="svg-d" onclick="toggleLetter('d')">
+        <img id="img-d" src="main/d.svg" alt="d" style="width: auto; height: auto;">
+    </div>
+    
+    <!-- Bottom SVG elements -->
+    <div class="bottom-svg-1" id="bottom-1">
+        <img src="main/1.svg" alt="1" style="width: auto; height: auto;">
+    </div>
+    <div class="bottom-svg-2" id="bottom-2">
+        <img src="main/2.svg" alt="2" style="width: auto; height: auto;">
+    </div>
+    <div class="bottom-svg-3" id="bottom-3">
+        <img src="main/3.svg" alt="3" style="width: auto; height: auto;">
+    </div>
+    <div class="bottom-svg-4" id="bottom-4">
+        <img src="main/4.svg" alt="4" style="width: auto; height: auto;">
+    </div>
+    
+    <!-- Wow SVG - 항상 표시되는 요소 -->
+    <div class="wow-svg">
+        <img src="main/wow.svg" alt="Wow" style="width: auto; height: auto;">
+    </div>
+    
+    <script>
+        function toggleLetter(letter) {
+            // 모든 요소를 원래 상태로 리셋
+            document.getElementById('img-a').src = 'main/a.svg';
+            document.getElementById('img-b').src = 'main/b.svg';
+            document.getElementById('img-c').src = 'main/c.svg';
+            document.getElementById('img-d').src = 'main/d.svg';
+            
+            // 클릭한 요소만 두 글자로 변경
+            document.getElementById('img-' + letter).src = 'main/' + letter + letter + '.svg';
+            
+            // a를 눌렀을 때만 밑에 SVG 표시, 나머지는 숨김
+            if (letter === 'a') {
+                document.getElementById('bottom-1').style.display = 'block';
+                document.getElementById('bottom-2').style.display = 'block';
+                document.getElementById('bottom-3').style.display = 'block';
+                document.getElementById('bottom-4').style.display = 'block';
+            } else {
+                document.getElementById('bottom-1').style.display = 'none';
+                document.getElementById('bottom-2').style.display = 'none';
+                document.getElementById('bottom-3').style.display = 'none';
+                document.getElementById('bottom-4').style.display = 'none';
+            }
+        }
+        
+    </script>
+</body>
+</html>
