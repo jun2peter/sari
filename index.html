@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SARI 웹사이트</title>
     <style>
         body {
@@ -15,69 +15,6 @@
             font-family: Arial, sans-serif;
         }
         
-        /* 모바일 SVG 화질 최적화 */
-        @media screen and (max-width: 768px) {
-            body {
-                -webkit-text-size-adjust: 100%;
-                -webkit-tap-highlight-color: transparent;
-            }
-            
-            img[src$=".svg"] {
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
-                image-rendering: pixelated;
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                -webkit-perspective: 1000;
-                perspective: 1000;
-            }
-            
-            /* 숫자 SVG들에 특별한 모바일 최적화 */
-            .bottom-svg-1 img, .bottom-svg-2 img, .bottom-svg-3 img, .bottom-svg-4 img,
-            .bottom-svg-5 img, .bottom-svg-6 img, .bottom-svg-7 img, .bottom-svg-8 img,
-            .bottom-svg-9 img, .bottom-svg-10 img, .bottom-svg-11 img, .bottom-svg-12 img,
-            .bottom-svg-13 img, .bottom-svg-14 img, .bottom-svg-15 img, .bottom-svg-16 img,
-            .bottom-svg-17 img {
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
-                image-rendering: pixelated;
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-                will-change: transform;
-                -webkit-perspective: 1000;
-                perspective: 1000;
-                -webkit-filter: contrast(1.1) brightness(1.05);
-                filter: contrast(1.1) brightness(1.05);
-            }
-            
-            /* 모바일에서 스크롤바 투명하게 */
-            body::-webkit-scrollbar {
-                width: 0px;
-                background: transparent;
-            }
-            
-            body::-webkit-scrollbar-thumb {
-                background: transparent;
-            }
-            
-            body::-webkit-scrollbar-track {
-                background: transparent;
-            }
-        }
-        
-        /* 고해상도 디스플레이 최적화 */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            img[src$=".svg"] {
-                image-rendering: -webkit-optimize-contrast;
-                image-rendering: crisp-edges;
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-        }
         
         .menu {
             position: absolute;
