@@ -2,13 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SARI 웹사이트</title>
     <style>
-        html, body {
-            overflow-x: hidden;
-        }
-        
         body {
             margin: 0;
             padding: 0;
@@ -217,6 +213,14 @@
             background-color: #4CAF50;
             color: white;
             transform: translateY(-2px);
+        }
+        
+        /* 휴대폰에서만 1080px을 축소해서 보여주기 */
+        @media screen and (max-width: 768px) {
+            body {
+                transform: scale(calc(100vw / 1080));
+                transform-origin: top left;
+            }
         }
         
         
