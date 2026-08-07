@@ -11,10 +11,12 @@ npm run dev
 
 ## 상품 추가하기
 
-1. 상품 사진을 `public/assets/products/`에 넣습니다. 영문 파일명을 권장합니다.
-2. `src/data/catalog.ts`의 `products` 배열에서 기존 상품 한 줄을 복사합니다.
+1. GitHub에서 `assets/products/`에 상품 사진을 올립니다. 영문 파일명을 권장합니다.
+2. 루트의 `catalog.json`에서 기존 상품 한 줄을 복사합니다.
 3. `id`, `code`, `name`, `price`, `category`, `image`를 바꿉니다.
-4. GitHub의 `main` 브랜치에 저장하면 GitHub Pages가 자동으로 다시 배포됩니다.
+4. `main` 브랜치에 저장하면 GitHub Pages가 자동으로 다시 배포됩니다.
+
+`public/catalog.json`과 `public/assets/products/`는 개발용 원본입니다. 코드 전체를 다시 빌드할 때는 같은 변경을 이 폴더에도 반영합니다.
 
 카테고리 값은 다음 중 하나를 사용합니다.
 

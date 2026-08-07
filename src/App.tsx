@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CartDrawer } from './components/CartDrawer'
 import { ProductCard } from './components/ProductCard'
 import { ProductSheet } from './components/ProductSheet'
-import { categories, products } from './data/catalog'
+import { categories, products as fallbackProducts } from './data/catalog'
 import type { CartLine, CategoryId, Product } from './types'
 import './styles.css'
 
@@ -26,22 +26,34 @@ export default function App() {
   const [sort, setSort] = useState<'default' | 'name' | 'price-low' | 'price-high'>('default')
   const [favorites, setFavorites] = useState<string[]>(() => loadArray('sari-favorites', []))
   const [cart, setCart] = useState<CartLine[]>(() => loadArray('sari-cart', []))
+  const [catalogProducts, setCatalogProducts] = useState<Product[]>(fallbackProducts)
   const [toast, setToast] = useState('')
 
   const category = categories.find((item) => item.id === activeCategory) ?? categories[0]
   const visibleProducts = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase('ko-KR')
-    const next = products.filter((product) => product.category === activeCategory && (!normalized || `${product.name} ${product.code}`.toLocaleLowerCase('ko-KR').includes(normalized)))
+    const next = catalogProducts.filter((product) => product.category === activeCategory && (!normalized || `${product.name} ${product.code}`.toLocaleLowerCase('ko-KR').includes(normalized)))
     if (sort === 'name') return [...next].sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'))
     if (sort === 'price-low') return [...next].sort((a, b) => a.price - b.price)
     if (sort === 'price-high') return [...next].sort((a, b) => b.price - a.price)
     return next
-  }, [activeCategory, query, sort])
+  }, [activeCategory, catalogProducts, query, sort])
 
   const cartCount = cart.reduce((sum, line) => sum + line.quantity, 0)
 
   useEffect(() => localStorage.setItem('sari-favorites', JSON.stringify(favorites)), [favorites])
   useEffect(() => localStorage.setItem('sari-cart', JSON.stringify(cart)), [cart])
+  useEffect(() => {
+    fetch('./catalog.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('catalog load failed')
+        return response.json()
+      })
+      .then((data: { products?: Product[] }) => {
+        if (Array.isArray(data.products)) setCatalogProducts(data.products)
+      })
+      .catch(() => setCatalogProducts(fallbackProducts))
+  }, [])
   useEffect(() => {
     document.body.classList.toggle('is-locked', menuOpen || cartOpen || Boolean(selectedProduct))
     return () => document.body.classList.remove('is-locked')
@@ -71,11 +83,11 @@ export default function App() {
 
   const shareOrder = async () => {
     const lines = cart.flatMap((line) => {
-      const product = products.find((item) => item.id === line.productId)
+      const product = catalogProducts.find((item) => item.id === line.productId)
       return product ? [`${product.code} ${product.name} × ${line.quantity} — ₩ ${(product.price * line.quantity).toLocaleString('ko-KR')}`] : []
     })
     const total = cart.reduce((sum, line) => {
-      const product = products.find((item) => item.id === line.productId)
+      const product = catalogProducts.find((item) => item.id === line.productId)
       return sum + (product?.price ?? 0) * line.quantity
     }, 0)
     const text = `SARI 주문 요청\n\n${lines.join('\n')}\n\n합계 ₩ ${total.toLocaleString('ko-KR')}\n※ 배송비와 제작 일정은 별도 확인`
@@ -200,7 +212,7 @@ export default function App() {
       <CartDrawer
         open={cartOpen}
         lines={cart}
-        products={products}
+        products={catalogProducts}
         onClose={() => setCartOpen(false)}
         onQuantity={(productId, quantity) => setCart((lines) => lines.map((line) => line.productId === productId ? { ...line, quantity } : line))}
         onRemove={(productId) => setCart((lines) => lines.filter((line) => line.productId !== productId))}
