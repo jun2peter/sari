@@ -131,7 +131,7 @@ export default function App() {
           <div className="hero__shade" />
           <div className="hero__copy">
             <span>HANDCRAFTED IN SEOUL</span>
-            <h1>마음을 담아<br />곁에 두는 단주</h1>
+            <h1>마음을 담아 <br />곁에 두는 단주</h1>
             <button type="button" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>컬렉션 보기</button>
           </div>
         </section>
